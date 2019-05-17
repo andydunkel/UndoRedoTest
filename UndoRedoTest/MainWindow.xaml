@@ -1,0 +1,71 @@
+﻿<Window x:Class="UndoRedoTest.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UndoRedoTest"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800"
+        DataContext="{Binding Main, Source={StaticResource Locator}}">
+
+    <Window.Resources>
+        <ResourceDictionary>
+            <Thickness x:Key="Margin">10</Thickness>
+            <Thickness x:Key="Padding">10</Thickness>
+            <Thickness x:Key="MarginSm">4</Thickness>
+            <Thickness x:Key="PaddingSm">4</Thickness>
+        </ResourceDictionary>
+    </Window.Resources>
+    
+    <Grid Margin="0,-1,0,1">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+            <RowDefinition Height="10*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="4*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Label Content="Name" HorizontalAlignment="Left" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center"/>
+        <Label Content="Age" HorizontalAlignment="Left" Grid.Row="1" Grid.Column="0"  VerticalAlignment="Center"/>
+        <TextBox HorizontalAlignment="Stretch" Grid.Row="0" Grid.Column="1" Padding="{StaticResource PaddingSm}" Text="{Binding Name, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" ></TextBox>
+        <TextBox HorizontalAlignment="Stretch" Grid.Row="1" Grid.Column="1" Padding="{StaticResource PaddingSm}" Text="{Binding Age}"></TextBox>
+
+        <WrapPanel Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" HorizontalAlignment="Stretch">
+            <Button Content="Insert" VerticalAlignment="Stretch" Margin="{StaticResource Margin}" Padding="{StaticResource Padding}" Command="{Binding InsertCommand}"></Button>
+            <Button Content="Delete" VerticalAlignment="Stretch" Margin="{StaticResource Margin}" Padding="{StaticResource Padding}" Command="{Binding DeleteCommand}"></Button>
+            <Button Content="Undo" VerticalAlignment="Stretch" Margin="{StaticResource Margin}" Padding="{StaticResource Padding}" Command="{Binding UndoCommand}"></Button>
+            <Button Content="Redo" VerticalAlignment="Stretch" Margin="{StaticResource Margin}" Padding="{StaticResource Padding}" Command="{Binding RedoCommand}"></Button>
+            <Button Content="Test" VerticalAlignment="Stretch" Margin="{StaticResource Margin}" Padding="{StaticResource Padding}" Click="Button_Click"></Button>
+        </WrapPanel>
+
+        <DataGrid x:Name="dataGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" CanUserDeleteRows="False" SelectedItem="{Binding SelectedPerson, Mode=TwoWay}"
+                  Grid.Column="0" Grid.Row="3"  ItemsSource="{Binding PersonList}" Grid.ColumnSpan="2" AutoGenerateColumns="false" ColumnWidth="150" CanUserAddRows="False"
+                  CellEditEnding="DataGrid_CellEditEnding">
+            
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Name der Person" Width="250" Binding="{Binding Name}"></DataGridTextColumn>
+                <DataGridTextColumn Header="Alter der Person" Width="100"  Binding="{Binding Age}"></DataGridTextColumn>
+
+                <DataGridTemplateColumn>
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Button Command="{Binding Path=DataContext.DeleteCommand,       
+ RelativeSource= {RelativeSource FindAncestor,
+  AncestorType={x:Type DataGrid}}}">Delete</Button>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+
+            </DataGrid.Columns>
+            <DataGrid.InputBindings>
+                <KeyBinding Key="Delete" Command="{Binding DeleteCommand}"></KeyBinding>
+            </DataGrid.InputBindings>
+        </DataGrid>
+
+    </Grid>
+</Window>
