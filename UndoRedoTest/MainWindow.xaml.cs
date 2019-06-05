@@ -81,5 +81,10 @@ namespace UndoRedoTest
             _locator.Main.ExecuteCommand(cmd);
         }
 
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            OtherWindow w = new OtherWindow();
+            w.ShowDialog();
+        }
     }
 }

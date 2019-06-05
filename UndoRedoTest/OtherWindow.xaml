@@ -1,0 +1,28 @@
+﻿<Window x:Class="UndoRedoTest.OtherWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UndoRedoTest"
+        mc:Ignorable="d"
+        Title="OtherWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition></ColumnDefinition>    
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="45"></RowDefinition>
+            <RowDefinition Height="45"></RowDefinition>
+            <RowDefinition Height="45"></RowDefinition>
+        </Grid.RowDefinitions>
+        
+        
+        <TextBox x:Name="Name" Grid.Column="0" Grid.Row="0" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Text="{Binding Name}"></TextBox>
+        <TextBox x:Name="Age" Grid.Column="0" Grid.Row="1" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Text="{Binding Age}"></TextBox>
+        <WrapPanel Grid.Column="0" Grid.Row="2" Margin="5">
+            <Button Content="Undo" Width="50" Height="30"></Button>
+            <Button Content="Show" Width="50" Height="30" Click="Button_Click"></Button>
+        </WrapPanel>
+        
+    </Grid>
+</Window>

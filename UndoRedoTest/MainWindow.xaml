@@ -40,6 +40,7 @@
             <Button Content="Undo" VerticalAlignment="Stretch" Margin="{StaticResource Margin}" Padding="{StaticResource Padding}" Command="{Binding UndoCommand}"></Button>
             <Button Content="Redo" VerticalAlignment="Stretch" Margin="{StaticResource Margin}" Padding="{StaticResource Padding}" Command="{Binding RedoCommand}"></Button>
             <Button Content="Test" VerticalAlignment="Stretch" Margin="{StaticResource Margin}" Padding="{StaticResource Padding}" Click="Button_Click"></Button>
+            <Button Content="Open Window" VerticalAlignment="Stretch" Margin="{StaticResource Margin}" Padding="{StaticResource Padding}" Click="Button_Click_1"></Button>
         </WrapPanel>
 
         <DataGrid x:Name="dataGrid" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" CanUserDeleteRows="False" SelectedItem="{Binding SelectedPerson, Mode=TwoWay}"
